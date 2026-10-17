@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentShield — Autonomous Agent Security Gateway</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-canvas text-primary">
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-shield-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">AgentShield</span>
+          <span class="brand-version">v1.0.0</span>
+        </div>
+      </div>
+
+      <div class="system-status">
+        <span class="status-pulse-dot"></span>
+        <span class="status-label">DEFENSE ACTIVE</span>
+        <span class="status-uptime metrics-tabular" id="uptime-display">00:00:00</span>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" id="btn-verify-ledger">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          Verify Merkle Ledger
+        </button>
+        <button class="btn btn-primary" id="btn-run-audit">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Run 50-Probe Red-Team
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <!-- Telemetry Stats Grid -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Threat Resilience</span>
+          <span class="badge badge-safe">A+ TIER</span>
+        </div>
+        <div class="stat-value metrics-tabular" id="resilience-score">100.0%</div>
+        <div class="stat-caption">50/50 Adversarial Probes Neutralized</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">SSRF Interceptions</span>
+          <span class="badge badge-safe">PROTECTED</span>
+        </div>
+        <div class="stat-value metrics-tabular" id="ssrf-count">0</div>
+        <div class="stat-caption">Cloud Metadata & Private IPs Blocked</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Prompt Injections</span>
+          <span class="badge badge-safe">DELIMITED</span>
+        </div>
+        <div class="stat-value metrics-tabular" id="injections-count">0</div>
+        <div class="stat-caption">Encapsulated in &lt;untrusted_content&gt;</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Interception Latency</span>
+          <span class="badge badge-accent">SUB-MS</span>
+        </div>
+        <div class="stat-value metrics-tabular">0.82 ms</div>
+        <div class="stat-caption">Zero-Overhead JSON-RPC Proxy</div>
+      </div>
+    </section>
+
+    <!-- Two Column Security Workbench -->
+    <div class="workbench-grid">
+      <!-- Live Security Feed -->
+      <section class="panel-section">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2 class="panel-title">Real-Time Security Event Stream</h2>
+            <p class="panel-subtitle">Continuous append-only SHA-256 Merkle chain</p>
+          </div>
+          <button class="btn-icon" id="btn-refresh-feed" title="Refresh Feed">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Event List Feed -->
+        <div class="event-feed" id="event-feed-container">
+          <!-- Loaded dynamically via app.js -->
+        </div>
+      </section>
+
+      <!-- Active Defense Capabilities -->
+      <section class="panel-section">
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2 class="panel-title">Active Security Engines</h2>
+            <p class="panel-subtitle">Standardized defense guardrails</p>
+          </div>
+        </div>
+
+        <div class="defense-stack">
+          <div class="defense-item">
+            <div class="defense-icon-box icon-safe">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="defense-text">
+              <h4 class="defense-name">SSRF Egress Firewall</h4>
+              <p class="defense-desc">Blocks AWS/GCP/Azure 169.254.169.254 metadata and RFC 1918 private subnets.</p>
+            </div>
+            <span class="badge badge-safe">ACTIVE</span>
+          </div>
+
+          <div class="defense-item">
+            <div class="defense-icon-box icon-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 7 4 4 20 4 20 7"/>
+                <line x1="9" y1="20" x2="15" y2="20"/>
+                <line x1="12" y1="4" x2="12" y2="20"/>
+              </svg>
+            </div>
+            <div class="defense-text">
+              <h4 class="defense-name">Prompt Boundary Sanitizer</h4>
+              <p class="defense-desc">Encapsulates untrusted inputs into rigid XML tags with anti-jailbreak directives.</p>
+            </div>
+            <span class="badge badge-safe">ACTIVE</span>
+          </div>
+
+          <div class="defense-item">
+            <div class="defense-icon-box icon-warning">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="defense-text">
+              <h4 class="defense-name">HITL Tool Authorization Gate</h4>
+              <p class="defense-desc">Suspends Tier 3 destructive commands until verified by an HMAC-SHA256 signature.</p>
+            </div>
+            <span class="badge badge-warning">ENFORCING</span>
+          </div>
+
+          <div class="defense-item">
+            <div class="defense-icon-box icon-purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="defense-text">
+              <h4 class="defense-name">Tamper-Evident Merkle Ledger</h4>
+              <p class="defense-desc">Append-only SQLite event log with continuous cryptographic hash chain verification.</p>
+            </div>
+            <span class="badge badge-safe">SYNCHRONIZED</span>
+          </div>
+
+          <div class="defense-item">
+            <div class="defense-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </div>
+            <div class="defense-text">
+              <h4 class="defense-name">Webhook Security Alerting</h4>
+              <p class="defense-desc" id="webhook-desc">Asynchronous Slack, Discord &amp; SIEM dispatch with HMAC signatures.</p>
+            </div>
+            <button class="badge badge-safe" id="btn-test-webhook" style="cursor: pointer; border: none; font-family: inherit;">TEST ALERT</button>
+          </div>
+        </div>
+
+        <!-- Verification Banner Result -->
+        <div class="verify-banner" id="verify-banner" style="display: none;">
+          <div class="verify-icon" id="verify-icon">✓</div>
+          <div class="verify-text" id="verify-message">Ledger verified successfully.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

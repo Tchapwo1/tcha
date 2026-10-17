@@ -1,0 +1,51 @@
+{
+  "name": "tcha",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Tcha Protection Pro 2.0 — Enterprise-grade automated red-teaming harness, in-line MCP STDIO firewall, and cryptographic Merkle audit ledger for autonomous AI agents",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "tcha": "dist/cli/index.js",
+    "tcha-protection": "dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "requirements.txt",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli/index.js start",
+    "wrap": "node dist/cli/index.js wrap",
+    "proxy": "node dist/cli/index.js proxy",
+    "audit": "python src/cli/redteam_runner.py",
+    "report": "node dist/cli/index.js report report.html",
+    "test:py": "pytest tests",
+    "test:proxy": "node scripts/verify_proxy_wrap.js",
+    "test": "npm run test:proxy && npm run test:py"
+  },
+  "keywords": [
+    "tcha",
+    "tcha-protection",
+    "mcp",
+    "mcp-firewall",
+    "agentic-security",
+    "llm-firewall",
+    "ssrf-guard",
+    "prompt-injection",
+    "merkle-audit",
+    "owasp-llm-top-10"
+  ],
+  "author": "Tcha Protection Core Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,16 @@
+export const theme = {
+  bg: "#05070c",
+  cardBg: "rgba(13, 17, 27, 0.85)",
+  border: "rgba(255, 255, 255, 0.08)",
+  textMain: "#f8fafc",
+  textMuted: "#94a3b8",
+  emerald: "#10b981",
+  emeraldGlow: "rgba(16, 185, 129, 0.35)",
+  crimson: "#ef4444",
+  crimsonGlow: "rgba(239, 68, 68, 0.4)",
+  cyan: "#06b6d4",
+  cyanGlow: "rgba(6, 182, 212, 0.3)",
+  violet: "#8b5cf6",
+  fontMono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+  fontSans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+};
