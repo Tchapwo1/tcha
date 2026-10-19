@@ -5,7 +5,12 @@ import { SecurityLedgerTS } from '../core/ledger.js';
 import { startDashboardServer } from '../proxy/server.js';
 import { WebhookNotifierTS } from '../core/webhook_notifier.js';
 import { spawn } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const redteamScript = path.resolve(__dirname, '../../src/cli/redteam_runner.py');
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
 
@@ -46,7 +51,7 @@ switch (command) {
 
   case 'audit': {
     console.log('[Tcha Protection] Launching 100-probe Red-Teaming audit suite...');
-    const runnerArgs = ['src/cli/redteam_runner.py', ...args.slice(1)];
+    const runnerArgs = [redteamScript, ...args.slice(1)];
     const py = spawn('python', runnerArgs, { stdio: 'inherit' });
     py.on('exit', (code) => process.exit(code || 0));
     break;
@@ -55,7 +60,7 @@ switch (command) {
   case 'report': {
     const outPath = args[1] || 'report.html';
     console.log(`[Tcha Protection] Running 100-probe audit and compiling report to ${outPath}...`);
-    const py = spawn('python', ['src/cli/redteam_runner.py', '--export', outPath], { stdio: 'inherit' });
+    const py = spawn('python', [redteamScript, '--export', outPath], { stdio: 'inherit' });
     py.on('exit', (code) => process.exit(code || 0));
     break;
   }

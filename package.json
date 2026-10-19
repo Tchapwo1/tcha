@@ -1,6 +1,6 @@
 {
-  "name": "tcha",
-  "version": "2.0.0",
+  "name": "tcha-protection",
+  "version": "2.0.2",
   "type": "module",
   "description": "Tcha Protection Pro 2.0 — Enterprise-grade automated red-teaming harness, in-line MCP STDIO firewall, and cryptographic Merkle audit ledger for autonomous AI agents",
   "main": "dist/cli/index.js",
